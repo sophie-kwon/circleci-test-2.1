@@ -1,21 +1,13 @@
-version: 2
+version: 2.1
+
+orbs:
+  win: circleci/windows@2.2.0 # The Windows orb give you everything you need to start using the Windows executor.
+
 jobs:
-  build:
-    docker:
-      - image: circleci/python
+  build: # name of your job
+    executor: win/default # executor type
+
     steps:
-      - run: exit 0
-  test:
-    docker:
-      - image: circleci/python
-    steps:
+      # Commands are run in a Windows virtual machine environment
       - checkout
-      - run:
-          name: Run .sh for validation
-          command: bash .circleci/simple_script.sh ./
-workflows:
-  version: 2
-  btd:
-    jobs:
-    # - build
-    - test
+      - run: Write-Host 'Hello, Windows'
